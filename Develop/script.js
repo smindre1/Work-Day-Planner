@@ -24,30 +24,9 @@ $(function () {
 
 function currentDay() {
   var day = new Date();
-  // console.log(day, "day");
   var weekday = day.getDay();
-  console.log(weekday);
-  if (weekday == 0) {
-    $("#currentDay").text("Sunday");
-  }
-  if (weekday == 1) {
-    $("#currentDay").text("Monday");
-  }
-  if (weekday == 2) {
-    $("#currentDay").text("Tuesday");
-  }
-  if (weekday == 3) {
-    $("#currentDay").text("Wednesday");
-  }
-  if (weekday == 4) {
-    $("#currentDay").text("Thursday");
-  }
-  if (weekday == 5) {
-    $("#currentDay").text("Friday");
-  }
-  if (weekday == 6) {
-    $("#currentDay").text("Saturday");
-  }
+  var dayOfTheWeek = { 0: "Sunday", 1: "Monday", 2: "Tuesday", 3: "Wednesday", 4: "Thursday", 5: "Friday", 6: "Saturday" };
+  $("#currentDay").text(dayOfTheWeek[weekday]);
 }
 
 currentDay();
