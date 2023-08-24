@@ -21,3 +21,33 @@ $(function () {
   //
   // TODO: Add code to display the current date in the header of the page.
 });
+
+function currentDay() {
+  var day = new Date();
+  // console.log(day, "day");
+  var weekday = day.getDay();
+  console.log(weekday);
+  if (weekday == 0) {
+    $("#currentDay").text("Sunday");
+  }
+  if (weekday == 1) {
+    $("#currentDay").text("Monday");
+  }
+  if (weekday == 2) {
+    $("#currentDay").text("Tuesday");
+  }
+  if (weekday == 3) {
+    $("#currentDay").text("Wednesday");
+  }
+  if (weekday == 4) {
+    $("#currentDay").text("Thursday");
+  }
+  if (weekday == 5) {
+    $("#currentDay").text("Friday");
+  }
+  if (weekday == 6) {
+    $("#currentDay").text("Saturday");
+  }
+}
+
+currentDay();
