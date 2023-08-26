@@ -9,17 +9,9 @@ $(function () {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
   //
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
-  //
-  // TODO: Add code to display the current date in the header of the page.
 });
 
 function currentDay() {
@@ -32,7 +24,7 @@ function currentDay() {
 function timeBlockColors() {
   var currentHour = new Date();
   currentHour = currentHour.getHours();
-  console.log(currentHour);
+  // console.log(currentHour);
   blockList = {
     9: $("#hour-9"),
     10: $("#hour-10"),
@@ -45,24 +37,21 @@ function timeBlockColors() {
     17: $("#hour-5"),
   };
   if (currentHour < 9) {
-    console.log("all green");
+    for (i = 9; i < 18; i++) {
+      blockList[i].addClass("future");
+    }
   }
   if (currentHour > 17) {
-    console.log("all grey");
+    for (i = 9; i < 18; i++) {
+      blockList[i].addClass("past");
+    }
   } else {
     for (i = 9; i < currentHour; i++) {
-      // blockList[i].setAttribute("class", "past");
       blockList[i].addClass("past");
     }
     for (i = 17; i > currentHour; i--) {
-      // console.log(blockList[i].classList.contains());
-      // blockList[i].classList.add("future");
-      // $("#hour-4").setAttribute("class", "future");
       blockList[i].addClass("future");
     }
-    // blockList[currentHour].classList.add("present");
-    // console.log(blockList[currentHour].classList.contains());
-    // blockList[currentHour].setAttribute("class", "present");
     blockList[currentHour].addClass("present");
   }
 }
