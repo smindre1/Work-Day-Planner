@@ -29,4 +29,43 @@ function currentDay() {
   $("#currentDay").text(dayOfTheWeek[weekday]);
 }
 
+function timeBlockColors() {
+  var currentHour = new Date();
+  currentHour = currentHour.getHours();
+  console.log(currentHour);
+  blockList = {
+    9: $("#hour-9"),
+    10: $("#hour-10"),
+    11: $("#hour-11"),
+    12: $("#hour-12"),
+    13: $("#hour-1"),
+    14: $("#hour-2"),
+    15: $("#hour-3"),
+    16: $("#hour-4"),
+    17: $("#hour-5"),
+  };
+  if (currentHour < 9) {
+    console.log("all green");
+  }
+  if (currentHour > 17) {
+    console.log("all grey");
+  } else {
+    for (i = 9; i < currentHour; i++) {
+      // blockList[i].setAttribute("class", "past");
+      blockList[i].addClass("past");
+    }
+    for (i = 17; i > currentHour; i--) {
+      // console.log(blockList[i].classList.contains());
+      // blockList[i].classList.add("future");
+      // $("#hour-4").setAttribute("class", "future");
+      blockList[i].addClass("future");
+    }
+    // blockList[currentHour].classList.add("present");
+    // console.log(blockList[currentHour].classList.contains());
+    // blockList[currentHour].setAttribute("class", "present");
+    blockList[currentHour].addClass("present");
+  }
+}
+
 currentDay();
+timeBlockColors();
