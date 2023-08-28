@@ -49,15 +49,13 @@ function timeBlockColors() {
 }
 
 $("button").click(function () {
-  // plans = [];
-  plans = { 9: "", 10: "", 11: "", 12: "", 13: "", 14: "", 15: "", 16: "", 17: "" };
+  var plans = { 9: "", 10: "", 11: "", 12: "", 13: "", 14: "", 15: "", 16: "", 17: "" };
   if (localStorage.getItem("workDayPlans") === null) {
     localStorage.setItem("workDayPlans", JSON.stringify(plans));
   }
   for (i = 9; i < 18; i++) {
     console.log(plans, "plans");
     plans = JSON.parse(localStorage.getItem("workDayPlans"));
-    // console.log(blockList[i].children("textarea").val(), "textarea");
     plans[i] = blockList[i].children("textarea").val();
     console.log(plans, "plans");
     localStorage.setItem("workDayPlans", JSON.stringify(plans));
@@ -71,10 +69,7 @@ function loadWorkDayPlans() {
   workDayPlans = JSON.parse(localStorage.getItem("workDayPlans"));
   key = { 9: "9", 10: "10", 11: "11", 12: "12", 13: "13", 14: "14", 15: "15", 16: "16", 17: "17" };
   for (i = 9; i < 18; i++) {
-    // console.log(key[i], "key[i]");
-    // console.log(workDayPlans[key[i]], "workDayPlans[key[i]]");
     blockList[i].find("textarea").append(workDayPlans[key[i]]);
-    // console.log(blockList[i].find("textarea").val(), "innerHTML");
   }
 }
 
