@@ -4,6 +4,7 @@ $(function () {
   loadWorkDayPlans();
 });
 
+//Obtains the day of the week and date to display on the top of the webpage.
 function currentDay() {
   var day = new Date();
   dayOfMonth = day.getDate();
@@ -14,6 +15,7 @@ function currentDay() {
   $("#currentDay").text(dayOfTheWeek[weekday] + ", " + month[monthOfYear] + " " + dayOfMonth);
 }
 
+//Checks the user's time when page loads and adjusts the timeblock's colors to coordinate with it.
 function timeBlockColors() {
   var currentHour = new Date();
   currentHour = currentHour.getHours();
@@ -40,6 +42,21 @@ function timeBlockColors() {
   }
 }
 
+//Upon the page loading or refreshing this function checks the local storage for user's prior plan
+//edits and if they exist it fills them out into the coorisponding textareas.
+function loadWorkDayPlans() {
+  if (localStorage.getItem("workDayPlans") === null) {
+    return;
+  }
+  workDayPlans = JSON.parse(localStorage.getItem("workDayPlans"));
+  key = { 9: "9", 10: "10", 11: "11", 12: "12", 13: "13", 14: "14", 15: "15", 16: "16", 17: "17" };
+  for (i = 9; i < 18; i++) {
+    blockList[i - 9].append(workDayPlans[key[i]]);
+  }
+}
+
+//Upon clicking any of the save buttons the user's inputed text in the textareas of the webpage get
+//set into an associative array to be logged into local storage.
 $("button").click(function () {
   var plans = { 9: "", 10: "", 11: "", 12: "", 13: "", 14: "", 15: "", 16: "", 17: "" };
   if (localStorage.getItem("workDayPlans") === null) {
@@ -53,14 +70,3 @@ $("button").click(function () {
     localStorage.setItem("workDayPlans", JSON.stringify(plans));
   }
 });
-
-function loadWorkDayPlans() {
-  if (localStorage.getItem("workDayPlans") === null) {
-    return;
-  }
-  workDayPlans = JSON.parse(localStorage.getItem("workDayPlans"));
-  key = { 9: "9", 10: "10", 11: "11", 12: "12", 13: "13", 14: "14", 15: "15", 16: "16", 17: "17" };
-  for (i = 9; i < 18; i++) {
-    blockList[i - 9].append(workDayPlans[key[i]]);
-  }
-}
