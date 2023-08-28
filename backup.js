@@ -14,49 +14,38 @@ function timeBlockColors() {
   var currentHour = new Date();
   currentHour = currentHour.getHours();
   // console.log(currentHour);
-  blockList = [
-    $("#hour-9").find("textarea"),
-    $("#hour-10").find("textarea"),
-    $("#hour-11").find("textarea"),
-    $("#hour-12").find("textarea"),
-    $("#hour-1").find("textarea"),
-    $("#hour-2").find("textarea"),
-    $("#hour-3").find("textarea"),
-    $("#hour-4").find("textarea"),
-    $("#hour-5").find("textarea"),
-  ];
+  blockList = {
+    9: $("#hour-9"),
+    10: $("#hour-10"),
+    11: $("#hour-11"),
+    12: $("#hour-12"),
+    13: $("#hour-1"),
+    14: $("#hour-2"),
+    15: $("#hour-3"),
+    16: $("#hour-4"),
+    17: $("#hour-5"),
+  };
   // currentHour = 8;
   // currentHour = 9;
-
-  for (i = 9; i < 17; i++) {
-    if (i > currentHour) {
-      blockList[x].addClass("past");
-    } else if (currentHour == i) {
-      blockList[currentHour].addClass("present");
-    } else if (currentHour < i) {
+  if (currentHour < 9) {
+    for (i = 9; i < 18; i++) {
       blockList[i].addClass("future");
     }
   }
-
-  // if (currentHour < 9) {
-  //   for (i = 9; i < 18; i++) {
-  //     blockList[i].addClass("future");
-  //   }
-  // }
-  // if (currentHour > 17) {
-  //   for (i = 9; i < 18; i++) {
-  //     blockList[i].addClass("past");
-  //   }
-  // }
-  // if (9 <= currentHour <= 17) {
-  //   for (i = 9; i < currentHour; i++) {
-  //     blockList[i].addClass("past");
-  //   }
-  //   for (i = 17; i > currentHour; i--) {
-  //     blockList[i].addClass("future");
-  //   }
-  //   blockList[currentHour].addClass("present");
-  // }
+  if (currentHour > 17) {
+    for (i = 9; i < 18; i++) {
+      blockList[i].addClass("past");
+    }
+  }
+  if (9 <= currentHour <= 17) {
+    for (i = 9; i < currentHour; i++) {
+      blockList[i].addClass("past");
+    }
+    for (i = 17; i > currentHour; i--) {
+      blockList[i].addClass("future");
+    }
+    blockList[currentHour].addClass("present");
+  }
 }
 
 $("button").click(function () {
@@ -91,7 +80,7 @@ function loadWorkDayPlans() {
 
 currentDay();
 timeBlockColors();
-// loadWorkDayPlans();
+loadWorkDayPlans();
 
 //Where should blockList be? global? does it need var before it's creation?
 //I hardset the current Hour because 8 does not work for hour.
