@@ -1,18 +1,7 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
-$(function () {
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-});
+$(function () {});
 
 function currentDay() {
   var day = new Date();
@@ -36,6 +25,8 @@ function timeBlockColors() {
     16: $("#hour-4"),
     17: $("#hour-5"),
   };
+  // currentHour = 8;
+  currentHour = 9;
   if (currentHour < 9) {
     for (i = 9; i < 18; i++) {
       blockList[i].addClass("future");
@@ -45,7 +36,8 @@ function timeBlockColors() {
     for (i = 9; i < 18; i++) {
       blockList[i].addClass("past");
     }
-  } else {
+  }
+  if (9 <= currentHour <= 17) {
     for (i = 9; i < currentHour; i++) {
       blockList[i].addClass("past");
     }
@@ -56,5 +48,39 @@ function timeBlockColors() {
   }
 }
 
+$("button").click(function () {
+  // plans = [];
+  plans = { 9: "", 10: "", 11: "", 12: "", 13: "", 14: "", 15: "", 16: "", 17: "" };
+  if (localStorage.getItem("workDayPlans") === null) {
+    localStorage.setItem("workDayPlans", JSON.stringify(plans));
+  }
+  for (i = 9; i < 18; i++) {
+    console.log(plans, "plans");
+    plans = JSON.parse(localStorage.getItem("workDayPlans"));
+    // console.log(blockList[i].children("textarea").val(), "textarea");
+    plans[i] = blockList[i].children("textarea").val();
+    console.log(plans, "plans");
+    localStorage.setItem("workDayPlans", JSON.stringify(plans));
+  }
+});
+
+function loadWorkDayPlans() {
+  if (localStorage.getItem("workDayPlans") === null) {
+    return;
+  }
+  workDayPlans = JSON.parse(localStorage.getItem("workDayPlans"));
+  key = { 9: "9", 10: "10", 11: "11", 12: "12", 13: "13", 14: "14", 15: "15", 16: "16", 17: "17" };
+  for (i = 9; i < 18; i++) {
+    // console.log(key[i], "key[i]");
+    // console.log(workDayPlans[key[i]], "workDayPlans[key[i]]");
+    blockList[i].find("textarea").append(workDayPlans[key[i]]);
+    // console.log(blockList[i].find("textarea").val(), "innerHTML");
+  }
+}
+
 currentDay();
 timeBlockColors();
+loadWorkDayPlans();
+
+//Where should blockList be? global? does it need var before it's creation?
+//I hardset the current Hour because 8 does not work for hour.
