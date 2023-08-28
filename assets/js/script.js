@@ -6,19 +6,13 @@ $(function () {
 
 //Obtains the day of the week and date to display on the top of the webpage.
 function currentDay() {
-  var day = new Date();
-  dayOfMonth = day.getDate();
-  var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  monthOfYear = day.getMonth();
-  var weekday = day.getDay();
-  var dayOfTheWeek = { 0: "Sunday", 1: "Monday", 2: "Tuesday", 3: "Wednesday", 4: "Thursday", 5: "Friday", 6: "Saturday" };
-  $("#currentDay").text(dayOfTheWeek[weekday] + ", " + month[monthOfYear] + " " + dayOfMonth);
+  var day = dayjs().format("dddd, MMMM D");
+  $("#currentDay").text(day);
 }
 
 //Checks the user's time when page loads and adjusts the timeblock's colors to coordinate with it.
 function timeBlockColors() {
-  var currentHour = new Date();
-  currentHour = currentHour.getHours();
+  var currentHour = dayjs().format("H");
   blockList = [
     $("#hour-9").find("textarea"),
     $("#hour-10").find("textarea"),
