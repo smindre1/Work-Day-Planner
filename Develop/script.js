@@ -26,7 +26,7 @@ function timeBlockColors() {
     17: $("#hour-5"),
   };
   // currentHour = 8;
-  currentHour = 9;
+  // currentHour = 9;
   if (currentHour < 9) {
     for (i = 9; i < 18; i++) {
       blockList[i].addClass("future");
