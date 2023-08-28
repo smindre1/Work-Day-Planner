@@ -1,6 +1,3 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
 $(function () {
   currentDay();
   timeBlockColors();
@@ -9,9 +6,12 @@ $(function () {
 
 function currentDay() {
   var day = new Date();
+  dayOfMonth = day.getDate();
+  var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  monthOfYear = day.getMonth();
   var weekday = day.getDay();
   var dayOfTheWeek = { 0: "Sunday", 1: "Monday", 2: "Tuesday", 3: "Wednesday", 4: "Thursday", 5: "Friday", 6: "Saturday" };
-  $("#currentDay").text(dayOfTheWeek[weekday]);
+  $("#currentDay").text(dayOfTheWeek[weekday] + ", " + month[monthOfYear] + " " + dayOfMonth);
 }
 
 function timeBlockColors() {
